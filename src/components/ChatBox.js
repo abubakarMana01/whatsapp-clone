@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 	chatContainer: {
 		paddingVertical: 8,
 		paddingHorizontal: 15,
-		margin: 10,
+		marginVertical: 8,
 		borderRadius: 12,
 	},
 	username: {

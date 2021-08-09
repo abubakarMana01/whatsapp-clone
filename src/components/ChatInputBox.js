@@ -1,45 +1,67 @@
-import React from "react";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
 
 import {
 	FontAwesome5,
 	MaterialCommunityIcons,
 	Entypo,
-	Fontisto,
-	Ionicons,
+	MaterialIcons,
 } from "@expo/vector-icons";
 import { colors } from "../config";
 
 const ChatInputBox = () => {
+	const [message, setMessage] = useState("");
+	const handleSendMessage = () => {
+		setMessage("");
+	};
+
 	return (
 		<View style={styles.inputContainer}>
 			<View style={styles.inputBox}>
-				<FontAwesome5 name="laugh-beam" size={24} color={colors.darkgrey} />
+				<TouchableOpacity activeOpacity={0.7}>
+					<FontAwesome5 name="laugh-beam" size={24} color={colors.darkgrey} />
+				</TouchableOpacity>
 				<TextInput
 					multiline
 					placeholder="Type a message"
 					style={styles.textInput}
+					value={message}
+					onChangeText={text => setMessage(text)}
 				/>
-				<Entypo
-					name="attachment"
-					style={styles.textBoxRightIcons}
-					size={20}
-					color={colors.darkgrey}
-				/>
-				<Fontisto
-					name="camera"
-					style={styles.textBoxRightIcons}
-					size={20}
-					color={colors.darkgrey}
-				/>
+				<TouchableOpacity activeOpacity={0.7}>
+					<Entypo
+						name="attachment"
+						style={styles.textBoxRightIcons}
+						size={20}
+						color={colors.darkgrey}
+					/>
+				</TouchableOpacity>
+				{!message && (
+					<TouchableOpacity activeOpacity={0.7}>
+						<FontAwesome5
+							name="camera"
+							style={styles.textBoxRightIcons}
+							size={21}
+							color={colors.darkgrey}
+						/>
+					</TouchableOpacity>
+				)}
 			</View>
-			<View style={styles.micContainer}>
-				<MaterialCommunityIcons
-					name="microphone"
-					size={24}
-					color={colors.white}
-				/>
-			</View>
+			<TouchableOpacity
+				activeOpacity={0.7}
+				style={styles.micContainer}
+				onPress={handleSendMessage}
+			>
+				{!message ? (
+					<MaterialCommunityIcons
+						name="microphone"
+						size={24}
+						color={colors.white}
+					/>
+				) : (
+					<MaterialIcons name="send" size={24} color={colors.white} />
+				)}
+			</TouchableOpacity>
 		</View>
 	);
 };

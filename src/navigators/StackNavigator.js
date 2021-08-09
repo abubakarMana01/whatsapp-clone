@@ -69,7 +69,7 @@ const ChatScreenStackHeaderRight = () => (
 const ChatScreenStackHeaderLeft = ({ navigation, route }) => (
 	<TouchableHighlight
 		underlayColor={"#ffffff50"}
-		style={{ borderRadius: 30, padding: 5 }}
+		style={{ borderRadius: 30, padding: 5, marginLeft: 5 }}
 		onPress={() => {}}
 		onPress={() => navigation.goBack()}
 	>
