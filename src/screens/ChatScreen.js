@@ -4,7 +4,6 @@ import { StyleSheet, ImageBackground, FlatList } from "react-native";
 import ChatInputBox from "../components/ChatInputBox";
 import chats from "../data/Chats";
 import ChatBox from "../components/ChatBox";
-import { useState } from "react";
 
 const ChatScreen = () => {
 	return (

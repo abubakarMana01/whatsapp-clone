@@ -15,6 +15,7 @@ const ChatBox = ({ message }) => {
 					backgroundColor: isMyMessage() ? "#d9f5c1" : colors.white,
 					marginRight: isMyMessage() ? 15 : 70,
 					marginLeft: isMyMessage() ? 70 : 15,
+					maxWidth: "80%",
 				},
 			]}
 		>
