@@ -4,13 +4,13 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
   Dimensions,
 } from "react-native";
 import { Camera } from "expo-camera";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 import CameraPreview from "./CameraPreview";
+import { StatusBar } from "expo-status-bar";
 
 export default function CameraScreen() {
   const [hasPermission, setHasPermission] = useState(null);
@@ -45,6 +45,7 @@ export default function CameraScreen() {
   };
   return (
     <View style={styles.container}>
+      <StatusBar style="dark" backgroundColor="black" />
       {showPreview && previewImage ? (
         <CameraPreview photo={previewImage} setShowPreview={setShowPreview} />
       ) : (
@@ -57,55 +58,51 @@ export default function CameraScreen() {
             camera = r;
           }}
         >
-          <View style={styles.bottom}>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => {
-                setFlashMode(
-                  flashMode === Camera.Constants.FlashMode.off
-                    ? Camera.Constants.FlashMode.on
-                    : Camera.Constants.FlashMode.off
-                );
-              }}
-            >
-              {Camera.Constants.FlashMode.on == "1" ? (
-                <MaterialIcons
-                  name="flash-on"
-                  size={30}
-                  color="white"
-                  style={styles.bottomIcons}
-                />
-              ) : (
+          <View style={styles.bottomContainer}>
+            <View style={styles.bottom}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => {
+                  setFlashMode(
+                    flashMode === Camera.Constants.FlashMode.off
+                      ? Camera.Constants.FlashMode.on
+                      : Camera.Constants.FlashMode.off
+                  );
+                }}
+              >
                 <MaterialIcons
                   name="flash-off"
-                  size={30}
+                  size={25}
                   color="white"
                   style={styles.bottomIcons}
                 />
-              )}
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={takePicture}
-              activeOpacity={0.8}
-              style={styles.snapButton}
-            />
-            <TouchableOpacity
-              onPress={() => {
-                setType(
-                  type === Camera.Constants.Type.back
-                    ? Camera.Constants.Type.front
-                    : Camera.Constants.Type.back
-                );
-              }}
-              activeOpacity={0.8}
-            >
-              <Ionicons
-                name="camera-reverse"
-                color="white"
-                size={30}
-                style={styles.bottomIcons}
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={takePicture}
+                activeOpacity={0.8}
+                style={styles.snapButton}
               />
-            </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  setType(
+                    type === Camera.Constants.Type.back
+                      ? Camera.Constants.Type.front
+                      : Camera.Constants.Type.back
+                  );
+                }}
+                activeOpacity={0.8}
+              >
+                <Ionicons
+                  name="camera-reverse"
+                  color="white"
+                  size={25}
+                  style={styles.bottomIcons}
+                />
+              </TouchableOpacity>
+            </View>
+            <Text style={{ color: "white" }}>
+              Hold for video, tap for photo
+            </Text>
           </View>
         </Camera>
       )}
@@ -114,14 +111,15 @@ export default function CameraScreen() {
 }
 
 const styles = StyleSheet.create({
-  camera: {
+  container: {
+    backgroundColor: "black",
     flex: 1,
+  },
+  camera: {
     alignItems: "center",
     justifyContent: "flex-end",
-  },
-  container: {
-    flex: 1,
-    height: Dimensions.get("window").height,
+    top: 50,
+    height: Dimensions.get("screen").height - 170,
   },
   snapButton: {
     width: 70,
@@ -129,15 +127,21 @@ const styles = StyleSheet.create({
     borderRadius: 35,
     backgroundColor: "transparent",
     borderColor: "white",
-    borderWidth: 3,
+    borderWidth: 2,
+  },
+  bottomContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    bottom: -63,
+    zIndex: 100,
   },
   bottom: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 40,
+    marginBottom: 10,
   },
   bottomIcons: {
-    marginHorizontal: 45,
+    marginHorizontal: 70,
   },
 });
