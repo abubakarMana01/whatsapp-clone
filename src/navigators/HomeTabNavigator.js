@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, View, Button } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -11,6 +11,20 @@ import CameraScreen from "../screens/CameraScreen";
 import { colors } from "../config";
 
 const Tab = createMaterialTopTabNavigator();
+
+const Camera = ({ navigation }) => {
+  useEffect(() => {
+    navigation.navigate("CameraScreen");
+  }, []);
+  return (
+    <View style={{ flex: 1 }}>
+      <Button
+        title="Camera"
+        onPress={() => navigation.navigate("CameraScreen")}
+      />
+    </View>
+  );
+};
 
 const AppNavigator = () => {
   return (
@@ -36,7 +50,7 @@ const AppNavigator = () => {
       }}
     >
       <Tab.Screen
-        component={CameraScreen}
+        component={Camera}
         name="Camera"
         options={{
           tabBarIcon: ({ focused, color }) =>
