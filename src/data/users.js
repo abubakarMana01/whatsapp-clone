@@ -4,7 +4,7 @@ export default [
 		name: "Neymar Jr.",
 		imageUri:
 			"https://image.shutterstock.com/image-vector/super-mom-hero-superhero-cartoon-600w-720015928.jpg",
-		unreadMessage: "Join me at PSG man",
+		unreadMessage: "Welcome to Paris",
 		numberOfUnreadMessages: 1,
 	},
 	{
@@ -37,7 +37,7 @@ export default [
 		name: "Di Maria",
 		imageUri:
 			"https://image.shutterstock.com/image-vector/super-mom-hero-superhero-cartoon-600w-720015928.jpg",
-		unreadMessage: "We can't wait to see you at Paris man",
+		unreadMessage: "Ici c'est Paris🤝🤝",
 		numberOfUnreadMessages: 0,
 	},
 	{

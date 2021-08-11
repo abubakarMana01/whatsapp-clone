@@ -1,11 +1,12 @@
-import { Feather } from "@expo/vector-icons";
 import React from "react";
+import { Feather } from "@expo/vector-icons";
 import {
   StyleSheet,
   View,
   ImageBackground,
   TouchableOpacity,
   Dimensions,
+  Text,
 } from "react-native";
 
 import {
@@ -70,6 +71,7 @@ const CameraPreview = ({ photo, setShowPreview }) => {
           width: "100%",
         }}
       ></ImageBackground>
+      <View></View>
     </View>
   );
 };

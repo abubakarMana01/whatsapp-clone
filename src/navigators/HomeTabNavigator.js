@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { StyleSheet, View, Button } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { useIsFocused } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
 import ChatsScreen from "../screens/ChatsScreen";
@@ -13,17 +14,11 @@ import { colors } from "../config";
 const Tab = createMaterialTopTabNavigator();
 
 const Camera = ({ navigation }) => {
+  const isFocused = useIsFocused();
   useEffect(() => {
-    navigation.navigate("CameraScreen");
-  }, []);
-  return (
-    <View style={{ flex: 1 }}>
-      <Button
-        title="Camera"
-        onPress={() => navigation.navigate("CameraScreen")}
-      />
-    </View>
-  );
+    isFocused ? navigation.navigate("CameraScreen") : null;
+  });
+  return <View style={{ flex: 1 }}></View>;
 };
 
 const AppNavigator = () => {
@@ -60,6 +55,7 @@ const AppNavigator = () => {
               <Ionicons name="camera" size={25} color={color} />
             ),
           tabBarShowLabel: false,
+          tabBarStyle: { height: 0 },
         }}
       />
       <Tab.Screen component={ChatsScreen} name="Chats" />

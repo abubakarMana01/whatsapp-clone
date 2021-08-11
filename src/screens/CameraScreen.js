@@ -7,15 +7,15 @@ import {
   Dimensions,
 } from "react-native";
 import { Camera } from "expo-camera";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 import CameraPreview from "./CameraPreview";
 import { StatusBar } from "expo-status-bar";
 
-export default function CameraScreen() {
+export default function CameraScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [flashMode, setFlashMode] = useState(Camera.Constants.FlashMode.off);
+  const [flashMode, setFlashMode] = useState("off");
   const [showPreview, setShowPreview] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   let camera;
@@ -46,65 +46,84 @@ export default function CameraScreen() {
   return (
     <View style={styles.container}>
       <StatusBar style="dark" backgroundColor="black" />
+
       {showPreview && previewImage ? (
         <CameraPreview photo={previewImage} setShowPreview={setShowPreview} />
       ) : (
-        <Camera
-          flashMode={flashMode}
-          style={styles.camera}
-          type={type}
-          ratio={"16:9"}
-          ref={(r) => {
-            camera = r;
-          }}
-        >
-          <View style={styles.bottomContainer}>
-            <View style={styles.bottom}>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => {
-                  setFlashMode(
-                    flashMode === Camera.Constants.FlashMode.off
-                      ? Camera.Constants.FlashMode.on
-                      : Camera.Constants.FlashMode.off
-                  );
-                }}
-              >
-                <MaterialIcons
-                  name="flash-off"
-                  size={25}
-                  color="white"
-                  style={styles.bottomIcons}
+        <>
+          <Feather
+            onPress={() => navigation.navigate("Chats")}
+            style={{ position: "absolute", left: 20, top: 20 }}
+            name="arrow-left"
+            size={24}
+            color="white"
+          />
+          <Camera
+            flashMode={flashMode}
+            style={styles.camera}
+            type={type}
+            ratio={"16:9"}
+            ref={(r) => {
+              camera = r;
+            }}
+          >
+            <View style={styles.bottomContainer}>
+              <View style={styles.bottom}>
+                <TouchableOpacity
+                  activeOpacity={0.8}
+                  onPress={() => {
+                    setFlashMode(
+                      flashMode == "on"
+                        ? setFlashMode("off")
+                        : setFlashMode("on")
+                    );
+                  }}
+                >
+                  {flashMode === "on" ? (
+                    <MaterialIcons
+                      name="flash-on"
+                      size={25}
+                      color="white"
+                      style={styles.bottomIcons}
+                    />
+                  ) : (
+                    <MaterialIcons
+                      name="flash-off"
+                      size={25}
+                      color="white"
+                      style={styles.bottomIcons}
+                    />
+                  )}
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={takePicture}
+                  activeOpacity={0.8}
+                  style={styles.snapButton}
                 />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={takePicture}
-                activeOpacity={0.8}
-                style={styles.snapButton}
-              />
-              <TouchableOpacity
-                onPress={() => {
-                  setType(
-                    type === Camera.Constants.Type.back
-                      ? Camera.Constants.Type.front
-                      : Camera.Constants.Type.back
-                  );
-                }}
-                activeOpacity={0.8}
-              >
-                <Ionicons
-                  name="camera-reverse"
-                  color="white"
-                  size={25}
-                  style={styles.bottomIcons}
-                />
-              </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setType(
+                      type === Camera.Constants.Type.back
+                        ? Camera.Constants.Type.front
+                        : Camera.Constants.Type.back
+                    );
+                  }}
+                  activeOpacity={0.8}
+                >
+                  <Ionicons
+                    name="camera-reverse"
+                    color="white"
+                    size={25}
+                    style={styles.bottomIcons}
+                  />
+                </TouchableOpacity>
+              </View>
+              <Text style={{ color: "white" }}>
+                Hold for video, tap for photo
+              </Text>
             </View>
-            <Text style={{ color: "white" }}>
-              Hold for video, tap for photo
-            </Text>
-          </View>
-        </Camera>
+          </Camera>
+        </>
       )}
     </View>
   );

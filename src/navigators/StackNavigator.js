@@ -96,13 +96,16 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerTitle: "WhatsApp",
+        headerTitle: "Mi Messenger",
         headerTitleStyle: { fontSize: 19 },
         headerStyle: {
           elevation: 0,
           shadowOpacity: 0,
+          borderBottomWidth: 0,
+          borderColor: colors.green,
           backgroundColor: colors.green,
         },
+        headerTitleAlign: "left",
         headerTintColor: colors.white,
         headerRight: () => <StackHeaderRight />,
       }}
