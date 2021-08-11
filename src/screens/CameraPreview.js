@@ -10,18 +10,13 @@ import {
   Keyboard,
   Platform,
 } from "react-native";
-import {
-  Entypo,
-  SimpleLineIcons,
-  MaterialIcons,
-  MaterialCommunityIcons,
-  FontAwesome5,
-  Feather,
-} from "@expo/vector-icons";
+import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import { colors } from "../config";
 
 const ImageCaptionBox = () => {
+  const navigation = useNavigation();
   const [caption, setCaption] = useState("");
   const handleSendMessage = () => {
     setCaption("");
@@ -51,7 +46,11 @@ const ImageCaptionBox = () => {
           />
         </TouchableOpacity>
       </View>
-      <TouchableOpacity activeOpacity={0.7} style={styles.micContainer}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={styles.doneContainer}
+        onPress={() => navigation.navigate("Chats")}
+      >
         <MaterialCommunityIcons name="check" size={24} color="white" />
       </TouchableOpacity>
     </View>
@@ -159,7 +158,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 25,
   },
-  micContainer: {
+  doneContainer: {
     width: 45,
     height: 45,
     backgroundColor: colors.green,
