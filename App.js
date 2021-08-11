@@ -1,5 +1,5 @@
 import "react-native-gesture-handler";
-import React, { useState } from "react";
+import React from "react";
 import {
   Platform,
   StyleSheet,
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#084d44",
-     marginTop: Platform.OS === "android" ? SB.currentHeight : 0,
+    marginTop: Platform.OS === "android" ? SB.currentHeight : 0,
   },
 });

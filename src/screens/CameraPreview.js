@@ -1,78 +1,125 @@
-import React from "react";
-import { Feather } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
   ImageBackground,
   TouchableOpacity,
   Dimensions,
-  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Platform,
 } from "react-native";
-
 import {
   Entypo,
   SimpleLineIcons,
   MaterialIcons,
   MaterialCommunityIcons,
+  FontAwesome5,
+  Feather,
 } from "@expo/vector-icons";
 
-const CameraPreview = ({ photo, setShowPreview }) => {
+import { colors } from "../config";
+
+const ImageCaptionBox = () => {
+  const [caption, setCaption] = useState("");
+  const handleSendMessage = () => {
+    setCaption("");
+  };
   return (
-    <View style={styles.imageContainer}>
-      <View style={styles.editingOptions}>
-        <TouchableOpacity
-          style={{ flex: 1 }}
-          onPress={() => setShowPreview(false)}
-        >
-          <Feather
-            name="arrow-left"
-            size={30}
-            color="white"
-            style={styles.editingIcons}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
+    <View style={styles.inputContainer}>
+      <View style={styles.inputBox}>
+        <TouchableOpacity activeOpacity={0.7}>
           <MaterialIcons
-            name="crop-rotate"
+            name="photo-library"
             size={24}
-            color="white"
-            style={styles.editingIcons}
+            color={colors.darkgrey}
           />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Entypo
-            name="emoji-happy"
-            size={24}
-            color="white"
-            style={styles.editingIcons}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
+        <TextInput
+          multiline
+          placeholder="Add a caption..."
+          style={styles.textInput}
+          value={caption}
+          onChangeText={(text) => setCaption(text)}
+        />
+        <TouchableOpacity activeOpacity={0.7}>
           <MaterialCommunityIcons
-            name="format-text"
-            size={29}
-            color="white"
-            style={styles.editingIcons}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <SimpleLineIcons
-            name="pencil"
-            size={20}
-            color="white"
-            style={styles.editingIcons}
+            name="numeric-1-circle-outline"
+            size={24}
+            color={colors.darkgrey}
           />
         </TouchableOpacity>
       </View>
-      <ImageBackground
-        source={{ uri: photo && photo.uri }}
-        style={{
-          height: Dimensions.get("window").height - 120,
-          width: "100%",
-        }}
-      ></ImageBackground>
-      <View></View>
+      <TouchableOpacity activeOpacity={0.7} style={styles.micContainer}>
+        <MaterialCommunityIcons name="check" size={24} color="white" />
+      </TouchableOpacity>
     </View>
+  );
+};
+
+const CameraPreview = ({ photo, setShowPreview }) => {
+  return (
+    <>
+      <View style={styles.imageContainer}>
+        <View style={styles.editingOptions}>
+          <TouchableOpacity
+            style={{ flex: 1 }}
+            onPress={() => setShowPreview(false)}
+          >
+            <MaterialCommunityIcons
+              name="arrow-left"
+              size={30}
+              color="white"
+              style={styles.editingIcons}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <MaterialCommunityIcons
+              name="crop-rotate"
+              size={24}
+              color="white"
+              style={styles.editingIcons}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <MaterialCommunityIcons
+              name="emoticon-happy-outline"
+              size={24}
+              color="white"
+              style={styles.editingIcons}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <MaterialCommunityIcons
+              name="format-text"
+              size={29}
+              color="white"
+              style={styles.editingIcons}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <MaterialCommunityIcons
+              name="pencil-outline"
+              size={24}
+              color="white"
+              style={styles.editingIcons}
+            />
+          </TouchableOpacity>
+        </View>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+          <ImageBackground
+            source={{ uri: photo && photo.uri }}
+            style={{
+              height: "100%",
+              width: "100%",
+              flex: 1,
+            }}
+          ></ImageBackground>
+        </TouchableWithoutFeedback>
+      </View>
+      <ImageCaptionBox />
+    </>
   );
 };
 
@@ -82,7 +129,7 @@ const styles = StyleSheet.create({
   imageContainer: {
     backgroundColor: "transparent",
     width: "100%",
-    flex: 1,
+    height: Dimensions.get("window").height - 90,
   },
   editingOptions: {
     flexDirection: "row",
@@ -93,6 +140,40 @@ const styles = StyleSheet.create({
     paddingTop: 10,
   },
   editingIcons: {
+    paddingHorizontal: 10,
+  },
+
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+    marginBottom: Platform.OS === "android" ? 0 : 10,
     marginHorizontal: 10,
+    position: "absolute",
+    bottom: 0,
+  },
+  inputBox: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+    flex: 1,
+    backgroundColor: colors.white,
+    padding: 10,
+    borderRadius: 25,
+  },
+  micContainer: {
+    width: 45,
+    height: 45,
+    backgroundColor: colors.green,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 22.5,
+    marginLeft: 5,
+  },
+  textInput: {
+    flex: 1,
+    marginLeft: 10,
+    fontSize: 18,
+  },
+  textBoxRightIcons: {
+    marginHorizontal: 5,
   },
 });
