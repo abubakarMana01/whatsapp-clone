@@ -7,7 +7,7 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
-*.idea/workspace.xml
+*.idea/
 web-build/
 
 # macOS
