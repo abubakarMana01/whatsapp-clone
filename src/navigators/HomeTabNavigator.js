@@ -18,7 +18,7 @@ const Camera = ({ navigation }) => {
   useEffect(() => {
     isFocused ? navigation.navigate("CameraScreen") : null;
   });
-  return <View style={{ flex: 1 }}></View>;
+  return <View style={{ flex: 1, backgroundColor: "#000" }}></View>;
 };
 
 const AppNavigator = () => {

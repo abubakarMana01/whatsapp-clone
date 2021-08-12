@@ -12,6 +12,7 @@ import { Camera } from "expo-camera";
 import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 import CameraPreview from "./CameraPreview";
+import { colors } from "../config";
 
 export default function CameraScreen({ navigation }) {
   useEffect(() => {
@@ -30,9 +31,20 @@ export default function CameraScreen({ navigation }) {
 
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
-  const [flashMode, setFlashMode] = useState("off");
   const [showPreview, setShowPreview] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
+  const [flashMode, setFlashMode] = useState("off");
+
+  const handleFlashMode = () => {
+    if (flashMode === "on") {
+      setFlashMode("off");
+    } else if (flashMode === "off") {
+      setFlashMode("on");
+    } else {
+      setFlashMode("auto");
+    }
+  };
+
   let camera;
 
   useEffect(() => {
@@ -85,19 +97,29 @@ export default function CameraScreen({ navigation }) {
                 }}
               >
                 {flashMode === "on" ? (
-                  <MaterialIcons
-                    name="flash-on"
-                    size={25}
-                    color="white"
-                    style={styles.bottomIcons}
-                  />
+                  <TouchableOpacity
+                    onPress={handleFlashMode}
+                    style={styles.bottomIconsContainer}
+                  >
+                    <MaterialIcons
+                      name="flash-on"
+                      size={25}
+                      color="white"
+                      style={styles.bottomIcons}
+                    />
+                  </TouchableOpacity>
                 ) : (
-                  <MaterialIcons
-                    name="flash-off"
-                    size={25}
-                    color="white"
-                    style={styles.bottomIcons}
-                  />
+                  <TouchableOpacity
+                    onPress={handleFlashMode}
+                    style={styles.bottomIconsContainer}
+                  >
+                    <MaterialIcons
+                      name="flash-off"
+                      size={25}
+                      color="white"
+                      style={styles.bottomIcons}
+                    />
+                  </TouchableOpacity>
                 )}
               </TouchableOpacity>
               <TouchableOpacity
@@ -106,6 +128,7 @@ export default function CameraScreen({ navigation }) {
                 style={styles.snapButton}
               />
               <TouchableOpacity
+                style={styles.bottomIconsContainer}
                 onPress={() => {
                   setType(
                     type === Camera.Constants.Type.back
@@ -164,7 +187,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 10,
   },
-  bottomIcons: {
-    marginHorizontal: 70,
+  bottomIconsContainer: {
+    marginHorizontal: 25,
+    height: 70,
+    width: 70,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

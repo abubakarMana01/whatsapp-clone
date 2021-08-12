@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, View, FlatList, BackHandler, Alert } from "react-native";
 
 import users from "../data/users";
 import chats from "../data/Chats";
@@ -8,6 +8,27 @@ import { colors } from "../config";
 import AddChatFloatingButton from "../components/AddChatFloatingButton";
 
 const ChatsScreen = ({ navigation }) => {
+  useEffect(() => {
+    const backAction = () => {
+      Alert.alert("Hold on!", "Are you sure you want to exit Mi Messenger?", [
+        {
+          text: "Cancel",
+          onPress: () => null,
+          style: "cancel",
+        },
+        { text: "YES", onPress: () => BackHandler.exitApp() },
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
   return (
     <View style={styles.container}>
       <FlatList

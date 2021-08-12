@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { colors } from "../config";
 
-const ChatBox = ({ message }) => {
+const ChatBox = ({ message, senderName }) => {
   const isMyMessage = () => {
     return message.user.id === "u1";
   };
@@ -18,9 +18,7 @@ const ChatBox = ({ message }) => {
         },
       ]}
     >
-      {!isMyMessage() && (
-        <Text style={styles.username}>{message.user.name}</Text>
-      )}
+      {!isMyMessage() && <Text style={styles.username}>{senderName}</Text>}
       <Text style={{ marginBottom: 10, fontSize: 16 }}>{message.content}</Text>
       <Text
         style={{

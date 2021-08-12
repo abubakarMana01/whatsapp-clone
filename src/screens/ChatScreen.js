@@ -6,7 +6,7 @@ import chats from "../data/Chats";
 import ChatBox from "../components/ChatBox";
 import { useState } from "react";
 
-const ChatScreen = () => {
+const ChatScreen = ({ route }) => {
   return (
     <ImageBackground
       source={require("../../assets/images/chatbackground.jpg")}
@@ -17,7 +17,9 @@ const ChatScreen = () => {
         keyExtractor={(item) => item.id}
         data={chats.messages}
         renderItem={({ item: message }) => {
-          return <ChatBox message={message} />;
+          return (
+            <ChatBox senderName={route.params.headerTitle} message={message} />
+          );
         }}
       />
 
