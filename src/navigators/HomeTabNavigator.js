@@ -44,6 +44,7 @@ const AppNavigator = () => {
         },
       }}
     >
+      <Tab.Screen component={ChatsScreen} name="Chats" />
       <Tab.Screen
         component={Camera}
         name="Camera"
@@ -58,7 +59,6 @@ const AppNavigator = () => {
           tabBarStyle: { height: 0 },
         }}
       />
-      <Tab.Screen component={ChatsScreen} name="Chats" />
       <Tab.Screen component={StatusScreen} name="Status" />
       <Tab.Screen component={CallsScreen} name="Calls" />
     </Tab.Navigator>
