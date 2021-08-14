@@ -1,12 +1,24 @@
-import React from "react";
-import { StyleSheet, ImageBackground, FlatList } from "react-native";
+import React, {useEffect} from "react";
+import { StyleSheet, ImageBackground, FlatList, BackHandler } from "react-native";
 
 import ChatInputBox from "../components/ChatInputBox";
 import chats from "../data/Chats";
 import ChatBox from "../components/ChatBox";
-import { useState } from "react";
 
-const ChatScreen = ({ route }) => {
+const ChatScreen = ({ route, navigation }) => {
+  useEffect(() => {
+    const backAction = () => {
+      navigation.navigate('Chats')
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
   return (
     <ImageBackground
       source={require("../../assets/images/chatbackground.jpg")}

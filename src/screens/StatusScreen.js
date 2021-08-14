@@ -9,6 +9,7 @@ import { colors } from "../config";
 
 const MyStatusCard = ({data}) => (
   <TouchableHighlight underlayColor={colors.mediumLight} onPress={() => {}}>
+  <>
   <View style={styles.card}>
       <View style={styles.lastStatusThumbnail}>
         <Image style={styles.thumbnail} source={{uri: data.imageUri}} />
@@ -18,6 +19,10 @@ const MyStatusCard = ({data}) => (
         <Text style={styles.time}>{moment(data.createdAt).fromNow()}</Text>
       </View>
     </View>
+      <View style={{height: 30, backgroundColor: colors.mediumLight, justifyContent: 'center'}}>
+        <Text style={{marginLeft: 10, fontWeight: '600', color: colors.darkgrey}}>Recent updates</Text>
+      </View>
+    </>
   </TouchableHighlight>
 )
 
