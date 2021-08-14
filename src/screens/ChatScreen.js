@@ -8,7 +8,7 @@ import ChatBox from "../components/ChatBox";
 const ChatScreen = ({ route, navigation }) => {
   useEffect(() => {
     const backAction = () => {
-      navigation.navigate('Chats')
+      navigation.goBack();
       return true;
     };
 
