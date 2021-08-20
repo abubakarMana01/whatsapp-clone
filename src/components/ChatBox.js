@@ -13,22 +13,14 @@ const ChatBox = ({ message, senderName }) => {
         styles.chatContainer,
         {
           backgroundColor: isMyMessage() ? "#d9f5c1" : colors.white,
-          marginRight: isMyMessage() ? 15 : 70,
-          marginLeft: isMyMessage() ? 70 : 15,
+          alignSelf: isMyMessage() ? 'flex-end' : 'flex-start'
         },
       ]}
     >
       {!isMyMessage() && <Text style={styles.username}>{senderName}</Text>}
-      <Text style={{ marginBottom: 10, fontSize: 16 }}>{message.content}</Text>
+      <Text style={{  fontSize: 16 }}>{message.content}</Text>
       <Text
-        style={{
-          textAlign: "right",
-          fontSize: 12,
-          color: colors.darkgrey,
-          position: "absolute",
-          bottom: 5,
-          right: 15,
-        }}
+        style={styles.time}
       >
         {new Date(message.createdAt).getHours() +
           ":" +
@@ -46,9 +38,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginVertical: 8,
     borderRadius: 12,
+    marginHorizontal: 10,
+    maxWidth: '80%'
   },
   username: {
     color: "dodgerblue",
-    marginBottom: 5,
   },
+  time:{
+     fontSize: 12,
+     color: colors.darkgrey,
+     alignSelf: 'flex-end',
+   }
 });

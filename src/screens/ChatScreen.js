@@ -22,7 +22,6 @@ const ChatScreen = ({ route, navigation }) => {
   return (
     <ImageBackground
       source={require("../../assets/images/chatbackground.jpg")}
-      resizeMode="repeat"
       style={styles.image}
     >
       <FlatList

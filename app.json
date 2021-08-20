@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "whatsapp",
-    "slug": "whatsapp",
+    "name": "mi messenger",
+    "slug": "mi-messenger",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -31,6 +31,7 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "A clone of Facebook's WhatsApp",
+    "githubUrl": "https://github.com/abubakarMana01/whatsapp-clone"
   }
 }
